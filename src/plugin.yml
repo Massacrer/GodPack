@@ -1,0 +1,7 @@
+name: GodPack
+main: me.Massacrer.GodPack.GodPack
+version: 1.0
+author: Massacrer
+commands:
+  gpack:
+    description: insert meaningful statement here
