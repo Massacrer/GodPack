@@ -18,67 +18,12 @@ public class GPTeleRings {
 		this.plugin = plugin;
 	}
 	
-	public void pillarDestructor() {
-		determineBlocks();
-		createPillars();
-		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-			public void run() {
-				destroyPillars();
-			}
-		}, 20L);
-	}
-	
-	private void determineBlocks() {
-		Block currentBlock = null;
-		// north blocks
-		for (int i = 0; i < 3; i++) {
-			currentBlock = world.getBlockAt(loc.getBlockX(), loc.getBlockY()
-					+ i, loc.getBlockZ() + 1);
-			if (isEmpty(currentBlock)) {
-				affectedBlocks.add(currentBlock);
-			}
-		}
-		// south blocks
-		for (int i = 0; i < 3; i++) {
-			currentBlock = world.getBlockAt(loc.getBlockX(), loc.getBlockY()
-					+ i, loc.getBlockZ() - 1);
-			if (isEmpty(currentBlock)) {
-				affectedBlocks.add(currentBlock);
-			}
-		}
-		// east blocks
-		for (int i = 0; i < 3; i++) {
-			currentBlock = world.getBlockAt(loc.getBlockX() + 1,
-					loc.getBlockY() + i, loc.getBlockZ());
-			if (isEmpty(currentBlock)) {
-				affectedBlocks.add(currentBlock);
-			}
-		}
-		// west blocks
-		for (int i = 0; i < 3; i++) {
-			currentBlock = world.getBlockAt(loc.getBlockX() - 1,
-					loc.getBlockY() + i, loc.getBlockZ());
-			if (isEmpty(currentBlock)) {
-				affectedBlocks.add(currentBlock);
-			}
-		}
-		// top block
-		currentBlock = world.getBlockAt(loc.getBlockX(), loc.getBlockY() + 2,
-				loc.getBlockZ());
-		if (isEmpty(currentBlock)) {
-			affectedBlocks.add(currentBlock);
-		}
-	} // End of determineBlocks code
-	
-	private void createPillars() {
-		for (Block block : affectedBlocks) {
-			block.setType(Material.GLOWSTONE);
-		}
-	}
-	
-	private void destroyPillars() {
-		for (Block block : affectedBlocks) {
-			block.setTypeId(0);
+	void mainLoop(Location src, Location dst) {
+		Layer[] srcLayers = new Layer[3];
+		Layer[] dstLayers = new Layer[3];
+		for (int i = 0; i < 2; i++) {
+			srcLayers[i] = new Layer(src);
+			dstLayers[i] = new Layer(dst);
 		}
 	}
 	
@@ -89,4 +34,14 @@ public class GPTeleRings {
 			return false;
 		}
 	}
+}
+
+class Layer {
+	Layer(Location loc) {
+		// Define blocks here
+	}
+	Location North = null;
+	Location South = null;
+	Location East = null;
+	Location West = null;
 }
