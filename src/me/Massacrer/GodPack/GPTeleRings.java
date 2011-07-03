@@ -19,11 +19,12 @@ public class GPTeleRings {
 	}
 	
 	void mainLoop(Location src, Location dst) {
-		Layer[] srcLayers = new Layer[3];
-		Layer[] dstLayers = new Layer[3];
 		for (int i = 0; i < 2; i++) {
-			srcLayers[i] = new Layer(src);
-			dstLayers[i] = new Layer(dst);
+			Layer srcLayer = new Layer();
+			srcLayer.Start(src);
+			Layer dstLayer = new Layer();
+			dstLayer.Start(dst);
+			
 		}
 	}
 	
@@ -37,11 +38,18 @@ public class GPTeleRings {
 }
 
 class Layer {
-	Layer(Location loc) {
-		// Define blocks here
+	void Start (Location loc) {
+		int x = (int) loc.getBlockX();
+		int y = (int) loc.getBlockY();
+		int z = (int) loc.getBlockZ();
+		World world = loc.getWorld();
+		North = world.getBlockAt(x,y,z);
+		South = world.getBlockAt(x,y,z);
+		East = world.getBlockAt(x,y,z);
+		West = world.getBlockAt(x,y,z);
 	}
-	Location North = null;
-	Location South = null;
-	Location East = null;
-	Location West = null;
+	Block North = null;
+	Block South = null;
+	Block East = null;
+	Block West = null;
 }
