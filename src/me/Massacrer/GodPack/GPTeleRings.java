@@ -43,10 +43,10 @@ class Layer {
 		int y = (int) loc.getBlockY();
 		int z = (int) loc.getBlockZ();
 		World world = loc.getWorld();
-		North = world.getBlockAt(x,y,z);
-		South = world.getBlockAt(x,y,z);
-		East = world.getBlockAt(x,y,z);
-		West = world.getBlockAt(x,y,z);
+		North = world.getBlockAt(x+1,y,z);
+		South = world.getBlockAt(x-1,y,z);
+		East = world.getBlockAt(x,y,z+1);
+		West = world.getBlockAt(x,y,z-1);
 	}
 	Block North = null;
 	Block South = null;
